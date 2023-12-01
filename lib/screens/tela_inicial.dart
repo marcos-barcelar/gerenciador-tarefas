@@ -9,7 +9,7 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-  bool opacidade = true;
+  bool opacity = true;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class _InitialScreenState extends State<InitialScreen> {
         leading: const Icon(Icons.add_task),
       ),
       body: AnimatedOpacity(
-        opacity: opacidade ? 1.0 : 0.0,
+        opacity: opacity ? 1.0 : 0.0,
         duration: const Duration(milliseconds: 500),
         child: ListView(
           children: const [
@@ -40,14 +40,14 @@ class _InitialScreenState extends State<InitialScreen> {
                 'assets/images/ler.jpg',
                 3),
             Task('Jogar',
-                'assets/images/jogar.jpg', 4),
+                'assets/images/jogar.jpeg', 4),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            opacidade = !opacidade;
+            opacity = !opacity;
           });
         },
         backgroundColor: Colors.blue[100],

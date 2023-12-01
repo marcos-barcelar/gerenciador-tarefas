@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/components/dificulty.dart';
+import 'package:task_manager/components/difficulty.dart';
 
 class Task extends StatefulWidget {
   final String nome;
-  final String foto;
-  final int dificuldade;
+  final String photo;
+  final int difficulty;
 
-  const Task(this.nome, this.foto, this.dificuldade, {Key? key})
+  const Task(this.nome, this.photo, this.difficulty, {Key? key})
       : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
+  int level = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _TaskState extends State<Task> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
                         child: Image.asset(
-                          widget.foto,
+                          widget.photo,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -69,7 +69,7 @@ class _TaskState extends State<Task> {
                             ),
                           ),
                         ),
-                        Difficulty(widget.dificuldade),
+                        Difficulty(widget.difficulty),
                       ],
                     ),
                     SizedBox(
@@ -78,14 +78,14 @@ class _TaskState extends State<Task> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            nivel++;
+                            level++;
                           });
-                          //print(nivel);
+                          //print(level);
                         },
-                        child: const Column(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
+                          children: const [
                             Icon(Icons.arrow_drop_up),
                             Text(
                               'Lvl Up',
@@ -107,13 +107,13 @@ class _TaskState extends State<Task> {
                       width: 200,
                       child: LinearProgressIndicator(
                         color: Colors.white,
-                        value: (widget.dificuldade > 0)
-                            ? (nivel / widget.dificuldade) / 10
+                        value: (widget.difficulty > 0)
+                            ? (level / widget.difficulty) / 10
                             : 1,
                       ),
                     ),
                     Text(
-                      'Nível: $nivel',
+                      'Nível: $level',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,

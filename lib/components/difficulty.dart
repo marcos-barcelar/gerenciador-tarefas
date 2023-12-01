@@ -42,7 +42,7 @@ class Difficulty extends StatelessWidget {
               : Colors.blue[100],
         ),
       ],
-    );;
+    );
   }
 }
 
