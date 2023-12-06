@@ -23,32 +23,22 @@ class _InitialScreenState extends State<InitialScreen> {
         duration: const Duration(milliseconds: 500),
         child: ListView(
           children: const [
-            Task(
-                'Aprender Flutter no intervalo do curso!',
-                'assets/images/flutter.png',
-                2),
-            Task(
-                'Andar de Bike',
-                'assets/images/bike.webp',
-                5),
-            Task(
-                'Meditar',
-                'assets/images/meditar.jpeg',
-                1),
-            Task(
-                'Ler',
-                'assets/images/ler.jpg',
-                3),
-            Task('Jogar',
-                'assets/images/jogar.jpeg', 4),
+            Task('Aprender Flutter no intervalo do curso!',
+                'assets/images/flutter.png', 2),
+            Task('Andar de Bike', 'assets/images/bike.webp', 5),
+            Task('Meditar', 'assets/images/meditar.jpeg', 1),
+            Task('Ler', 'assets/images/ler.jpg', 3),
+            Task('Jogar', 'assets/images/jogar.jpeg', 4),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            opacity = !opacity;
-          });
+          setState(
+            () {
+              opacity = !opacity;
+            },
+          );
         },
         backgroundColor: Colors.blue[100],
         child: const Icon(Icons.remove_red_eye),
