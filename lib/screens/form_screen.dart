@@ -57,6 +57,11 @@ class _FormScreenState extends State<FormScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  onChanged: (text){
+                    setState(() {
+
+                    });
+                  },
                   controller: imageController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
@@ -64,6 +69,28 @@ class _FormScreenState extends State<FormScreen> {
                     hintText: 'Imagem',
                     fillColor: Colors.white70,
                     filled: true,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 100,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 2, color: Colors.blue),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      imageController.text,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset('assets/images/nophoto.png');
+                      },
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
