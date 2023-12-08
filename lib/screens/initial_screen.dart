@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/screens/form_screen.dart';
 import '../components/tasks.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -9,8 +10,6 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-  bool opacity = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,30 +17,26 @@ class _InitialScreenState extends State<InitialScreen> {
         title: const Text('Tarefas'),
         leading: const Icon(Icons.add_task),
       ),
-      body: AnimatedOpacity(
-        opacity: opacity ? 1.0 : 0.0,
-        duration: const Duration(milliseconds: 500),
-        child: ListView(
-          children: const [
-            Task('Aprender Flutter no intervalo do curso!',
-                'assets/images/flutter.png', 2),
-            Task('Andar de Bike', 'assets/images/bike.webp', 5),
-            Task('Meditar', 'assets/images/meditar.jpeg', 1),
-            Task('Ler', 'assets/images/ler.jpg', 3),
-            Task('Jogar', 'assets/images/jogar.jpeg', 4),
-          ],
-        ),
+      body: ListView(
+        children: const [
+          Task('Aprender Flutter no intervalo do curso!',
+              'assets/images/flutter.png', 2),
+          Task('Andar de Bike', 'assets/images/bike.webp', 5),
+          Task('Meditar', 'assets/images/meditar.jpeg', 1),
+          Task('Ler', 'assets/images/ler.jpg', 3),
+          Task('Jogar', 'assets/images/jogar.jpeg', 4),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(
-            () {
-              opacity = !opacity;
-            },
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FormScreen(),
+            ),
           );
         },
-        backgroundColor: Colors.blue[100],
-        child: const Icon(Icons.remove_red_eye),
+        child: const Icon(Icons.add),
       ),
     );
   }

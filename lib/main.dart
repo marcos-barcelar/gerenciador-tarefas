@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/screens/form_screen.dart';
 import 'package:task_manager/screens/initial_screen.dart';
 
 void main() {
@@ -21,7 +20,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const FormScreen(),
+      home: const InitialScreen(),
     );
   }
 }
