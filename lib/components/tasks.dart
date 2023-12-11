@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/components/difficulty.dart';
 
 class Task extends StatefulWidget {
-  final String nome;
+  final String name;
   final String photo;
   final int difficulty;
 
-  const Task(this.nome, this.photo, this.difficulty, {Key? key})
+  const Task(this.name, this.photo, this.difficulty, {Key? key})
       : super(key: key);
 
   @override
@@ -15,6 +15,13 @@ class Task extends StatefulWidget {
 
 class _TaskState extends State<Task> {
   int level = 0;
+
+  bool assetOrNetwork() {
+    if (widget.photo.contains('http')) {
+      return false;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +56,9 @@ class _TaskState extends State<Task> {
                       height: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
-                        child: Image.asset(
-                          widget.photo,
-                          fit: BoxFit.cover,
-                        ),
+                        child: assetOrNetwork()
+                            ? Image.asset(widget.photo, fit: BoxFit.cover)
+                            : Image.network(widget.photo, fit: BoxFit.cover),
                       ),
                     ),
                     Column(
@@ -62,7 +68,7 @@ class _TaskState extends State<Task> {
                         SizedBox(
                           width: 200,
                           child: Text(
-                            widget.nome,
+                            widget.name,
                             style: const TextStyle(
                               fontSize: 24,
                               overflow: TextOverflow.ellipsis,
