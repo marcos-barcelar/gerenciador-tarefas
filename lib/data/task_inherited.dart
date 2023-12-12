@@ -15,13 +15,13 @@ class TaskInherited extends InheritedWidget {
     Task('Jogar', 'assets/images/jogar.jpeg', 4),
   ];
 
-  void newTask(String name, String photo, int difficulty){
+  void newTask(String name, String photo, int difficulty) {
     taskList.add(Task(name, photo, difficulty));
   }
 
   static TaskInherited of(BuildContext context) {
-    final TaskInherited? result = context.
-    dependOnInheritedWidgetOfExactType<TaskInherited>();
+    final TaskInherited? result =
+        context.dependOnInheritedWidgetOfExactType<TaskInherited>();
 
     assert(result != null, 'No  found in context');
     return result!;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/data/task_inherited.dart';
-import 'package:task_manager/screens/initial_screen.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key, required this.taskContext}) : super(key: key);
@@ -17,6 +16,20 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController imageController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  bool difficultyValidator(String? value) {
+    if (value!.isEmpty || int.parse(value) > 5 || int.parse(value) < 1) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +56,14 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (String? value) {
-                        if (value != null && value.isEmpty) {
+                        if (valueValidator(value)) {
                           return 'Insira o nome da Tarefa';
                         }
                         return null;
                       },
                       controller: nameController,
                       textAlign: TextAlign.center,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Nome',
                         fillColor: Colors.white70,
@@ -62,9 +75,7 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            int.parse(value) > 5 ||
-                            int.parse(value) < 1) {
+                        if (difficultyValidator(value)) {
                           return 'Insira uma Dificuldade entre 1 e 5';
                         }
                         return null;
@@ -72,7 +83,7 @@ class _FormScreenState extends State<FormScreen> {
                       keyboardType: TextInputType.number,
                       controller: difficultyController,
                       textAlign: TextAlign.center,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Dificuldade',
                         fillColor: Colors.white70,
@@ -84,7 +95,7 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (valueValidator(value)) {
                           return 'Insira uma URL de Imagem!';
                         }
                         return null;
@@ -95,7 +106,7 @@ class _FormScreenState extends State<FormScreen> {
                       },
                       controller: imageController,
                       textAlign: TextAlign.center,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Imagem',
                         fillColor: Colors.white70,
@@ -125,9 +136,6 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        //print(nameController.text);
-                        //print(int.parse(difficultyController.text));
-                        //print(imageController.text);
                         TaskInherited.of(widget.taskContext).newTask(
                           nameController.text,
                           imageController.text,
@@ -141,7 +149,7 @@ class _FormScreenState extends State<FormScreen> {
                         Navigator.pop(context);
                       }
                     },
-                    child: Text('Adicionar!'),
+                    child: const Text('Adicionar!'),
                   )
                 ],
               ),
