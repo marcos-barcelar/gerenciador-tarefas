@@ -82,8 +82,34 @@ class _TaskState extends State<Task> {
                       height: 52,
                       width: 82,
                       child: ElevatedButton(
-                        onLongPress: (){
-                          TaskDao().delete(widget.name);
+                        onLongPress: () {
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Excluir Tarefa'),
+                              content: const Text('Deseja realmente excluir?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancelar'),
+                                  child: const Text('Cancelar'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    TaskDao().delete(widget.name);
+                                    Navigator.of(context).pop();
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Tarefa excluída com sucesso!'),
+                                      ),
+                                    );
+                                  },
+                                  child: Text("Confirmar"),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                         onPressed: () {
                           setState(() {
@@ -103,7 +129,7 @@ class _TaskState extends State<Task> {
                           ],
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
