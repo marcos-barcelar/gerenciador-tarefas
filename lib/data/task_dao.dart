@@ -49,7 +49,7 @@ class TaskDao {
     print('Acessando o findAll: ');
     final Database bancoDeDados = await getDatabase();
     final List<Map<String, dynamic>> result =
-        await bancoDeDados.query(_tableName);
+    await bancoDeDados.query(_tableName);
     print('Procurando dados no banco de dados... encontrado: $result');
     return toList(result);
   }
@@ -75,6 +75,25 @@ class TaskDao {
     );
     print('Tarefa encontrada: ${toList(result)}');
     return toList(result);
+  }
+
+  Future<int> update(Task tarefa) async {
+    print('Iniciando o update: ');
+    final Database bancoDeDados = await getDatabase();
+    var itemExists = await find(tarefa.name);
+    if (itemExists.isEmpty) {
+      print('Tarefa não encontrada para atualização.');
+      return 0;
+    } else {
+      print('Tarefa encontrada para atualização.');
+      Map<String, dynamic> taskMap = toMap(tarefa);
+      return await bancoDeDados.update(
+        _tableName,
+        taskMap,
+        where: '$_name = ?',
+        whereArgs: [itemExists.first.name],
+      );
+    }
   }
 
   delete(String nomeDaTarefa) async {

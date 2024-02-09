@@ -67,7 +67,6 @@ class _InitialScreenState extends State<InitialScreen> {
                 case ConnectionState.done:
                   if (snapshot.hasData && items != null) {
                     if (items.isNotEmpty) {
-                      //colar o cód recortado aqui...
                       return ListView.builder(
                           itemCount: items.length,
                           itemBuilder: (

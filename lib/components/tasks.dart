@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/components/difficulty.dart';
 import 'package:task_manager/data/task_dao.dart';
+import 'package:task_manager/screens/formEdit_screen.dart';
 
 class Task extends StatefulWidget {
   final String name;
@@ -65,8 +66,8 @@ class _TaskState extends State<Task> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width: 200,
+                        Expanded(
+                          //width: 200,
                           child: Text(
                             widget.name,
                             style: const TextStyle(
@@ -80,7 +81,7 @@ class _TaskState extends State<Task> {
                     ),
                     SizedBox(
                       height: 52,
-                      width: 82,
+                      width: 70,
                       child: ElevatedButton(
                         onLongPress: () {
                           showDialog<String>(
@@ -129,7 +130,35 @@ class _TaskState extends State<Task> {
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FormEdit(
+                              taskContext: context,
+                              task: widget,
+                              ),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 40,
+                        width: 30,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: const [
+                            Icon(Icons.edit),
+                            Text(
+                              'Editar',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
