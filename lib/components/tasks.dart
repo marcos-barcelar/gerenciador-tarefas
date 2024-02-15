@@ -145,7 +145,7 @@ class _TaskState extends State<Task> {
                       },
                       child: SizedBox(
                         height: 40,
-                        width: 30,
+                        width: 50,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.end,

@@ -153,7 +153,7 @@ class _FormEdit extends State<FormEdit> {
                           imageController.text,
                           int.parse(difficultyController.text),
                         );
-                        TaskDao().update(updatedTask).then((rowsAffected) {
+                        TaskDao().update(widget.task, updatedTask.name, updatedTask.difficulty, updatedTask.photo).then((rowsAffected) {
                           if (rowsAffected > 0) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -182,3 +182,4 @@ class _FormEdit extends State<FormEdit> {
     );
   }
 }
+

@@ -77,24 +77,21 @@ class TaskDao {
     return toList(result);
   }
 
-  Future<int> update(Task tarefa) async {
-    print('Iniciando o update: ');
+  Future<int> update(Task task, String novoNomeDaTarefa, int novaDificuldade, String novaFoto) async {
+    print('Editando a tarefa: ${task.name} para $novoNomeDaTarefa');
     final Database bancoDeDados = await getDatabase();
-    var itemExists = await find(tarefa.name);
-    if (itemExists.isEmpty) {
-      print('Tarefa não encontrada para atualização.');
-      return 0;
-    } else {
-      print('Tarefa encontrada para atualização.');
-      Map<String, dynamic> taskMap = toMap(tarefa);
-      return await bancoDeDados.update(
-        _tableName,
-        taskMap,
-        where: '$_name = ?',
-        whereArgs: [itemExists.first.name],
-      );
-    }
+    return bancoDeDados.update(
+      _tableName,
+      {
+        _name: novoNomeDaTarefa,
+        _difficulty: novaDificuldade,
+        _image: novaFoto,
+      },
+      where: '$_name = ?',
+      whereArgs: [task.name],
+    );
   }
+
 
   delete(String nomeDaTarefa) async {
     print('Deletando a tarefa: $nomeDaTarefa');
